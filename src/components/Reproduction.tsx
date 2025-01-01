@@ -1,10 +1,14 @@
 import { FaBackward, FaForward, FaPlay } from "react-icons/fa";
 
-const Reproduction = () => {
+interface ReprodutorProps{
+  generateVideo: () => void;
+}
+
+const Reproduction: React.FC<ReprodutorProps> = ({ generateVideo }) => {
   return (
-    <div className="grow flex items-center justify-center gap-4 bg-gray-800">
+    <div className="grow min-h-12 flex items-center justify-center gap-4 bg-gray-800">
       <FaBackward />
-      <FaPlay />
+      <FaPlay onClick={generateVideo} />
       <FaForward />
     </div>
   )

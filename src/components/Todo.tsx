@@ -1,15 +1,10 @@
 import React from 'react';
 
-interface TodoProps {
-    lists: {
-        name: string;
-    },
-    handleNick: () => void;
-}
-
-const Todo: React.FC<TodoProps> = ({ lists, handleNick }) => {
+const Todo = () => {
   return (
-    <div onClick={handleNick}>{lists.name}</div>
+    <div className="h-16 flex items-center bg-white">
+      <p>dwadwa</p>
+    </div>
   )
 }
 

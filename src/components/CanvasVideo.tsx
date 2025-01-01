@@ -1,9 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 
-const CanvasVideo = () => {
+interface CanvasProps {
+  video: MediaRecorder | null;
+  setCanv: (canv: HTMLCanvasElement | null) => void;
+  setVideo: React.Dispatch<React.SetStateAction<MediaRecorder | null>>;
+}
+
+const CanvasVideo: React.FC<CanvasProps> = ({ setCanv, video, setVideo }) => {
  
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const [recordedBlobs, setRecordedBlobs] = useState<Blob[]>([]); // Array de Blob
   
   useEffect(() => {
     const canv = canvasRef.current;
@@ -11,30 +16,21 @@ const CanvasVideo = () => {
     if (canv) {
       const ctx = canv.getContext('2d');
       if (ctx) {
-        canv.width = 640;
-        canv.height = 480;
+        //canv.width = 640;
+        //canv.height = 480;
 
         const stream = canv.captureStream();
-        const video = new MediaRecorder(stream, { mimeType: 'video/webm' });
+        const mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
 
-        video.start();
-
-        video.ondataavailable = (event) => {
-            if (event.data && event.data.size > 0) {
-              setRecordedBlobs((e) => [...e, event.data]);
-            }
-        };
-
-        setTimeout(() => {
-          video.stop();
-        }, 5000);
+        setVideo(mediaRecorder);
+        setCanv(canv);
       }
     }
   }, []);
 
   return (
-    <div className="w-full bg-gray-950 aspect-video">
-      <canvas ref={canvasRef}></canvas>
+    <div className="w-full bg-black aspect-video">
+      <canvas className="w-full" width={1920} height={1080} ref={canvasRef}></canvas>
     </div>
   );
 };
