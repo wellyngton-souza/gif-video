@@ -1,0 +1,7 @@
+export interface TimelineItems{
+  name: string;
+  position: null | 0;
+  duration: null | 0;
+  location: string;
+}
+

@@ -1,5 +1,4 @@
 import React from "react";
-import { TimelineItems } from "../VideoEditor";
 
 interface TimelineItem{
   name: string;
@@ -8,7 +7,7 @@ interface TimelineItem{
 
 interface TimelineProps {
   timelineItems: TimelineItem[];
-  setTimelineItems: React.Dispatch<React.SetStateAction<TimelineItems>>;
+  setTimelineItems: React.Dispatch<React.SetStateAction<TimelineItem[]>>;
   handleDrop: (e: React.DragEvent<HTMLDivElement>) => void;
   handleDragOver: (e: React.DragEvent<HTMLDivElement>) => void;
 }
@@ -22,7 +21,7 @@ const Timeline: React.FC<TimelineProps> = ({ timelineItems, setTimelineItems, ha
           return <img
             className="max-h-full"
             key={index}
-            onClick={() => setTimelineItems((prevItems: TimelineItems) => prevItems.filter((_, i) => i !== index))}
+            onClick={() => setTimelineItems((prevItems: TimelineItem[]) => prevItems.filter((_, i) => i !== index))}
             src={item.location}
             alt={item.name}
           />;
